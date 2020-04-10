@@ -1,24 +1,39 @@
 #include <SFML/Graphics.hpp>
-
+#include "Graph.h"
+#include<cmath>
+#include<vector>
+using namespace std;
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
+	Graph graph(500,100,sf::Vector2f(30,90));
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+	const int samples=200;
 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+	float values[samples];
 
-    return 0;
+	for(int i=0;i<samples;i++){
+		values[i]=sin(i);
+	}
+
+	graph.setData(&values[0],samples);
+
+	while (window.isOpen())
+	{
+
+
+
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(graph);
+		window.display();
+	}
+
+	return 0;
 }
