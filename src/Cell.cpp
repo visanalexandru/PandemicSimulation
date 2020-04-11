@@ -15,16 +15,20 @@ using namespace chrono;
 Cell::Cell(){
 
 }
-Cell::Cell(float _size,float _speed,float _infectProb){
+Cell::Cell(float _size,float _speed,float _infectProb,bool alreadyInfected){
     cellSize = _size;
     speed = _speed;
     infectionProb = _infectProb;
-    circle.setFillColor(sf::Color::Red);
+    infected = alreadyInfected;
+    circle.setFillColor(sf::Color::Green);
     circle.setRadius(cellSize);
     circle.setPosition(rand() % (int)width,rand() % (int)height);
 }
 void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const{
     target.draw(circle);
+}
+void Cell::ChangeColor(sf::Color color){
+    circle.setFillColor(color);
 }
 
 sf::Vector2f Cell::RandomDirection(){

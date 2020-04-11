@@ -14,12 +14,13 @@ class Cell : public sf::Drawable
         float cellSize;
         float speed;
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        bool infected = false;
 
         Cell();
-        Cell(float _size,float _speed = 1,float _infectProb = 1);
+        Cell(float _size,float _speed = 1,float _infectProb = 1,bool alreadyInfected = false);
         void Move();
-        sf::Vector2f RandomDirection();
+        void ChangeColor(sf::Color color);
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     private:
 
         bool startMoving = false;
@@ -28,6 +29,8 @@ class Cell : public sf::Drawable
         sf::CircleShape circle;
         sf::Vector2f direction;
         std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+
+        sf::Vector2f RandomDirection();
 
 
 };
