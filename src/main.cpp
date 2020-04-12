@@ -2,7 +2,9 @@
 #include "Simulation.h"
 #include<cmath>
 #include<vector>
+
 using namespace std;
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
@@ -21,9 +23,6 @@ int main()
 
 	while (window.isOpen())
 	{
-
-
-
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
