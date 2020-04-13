@@ -22,13 +22,7 @@ class Simulation
     private:
         vector<Cell>cells;
         sf::RenderWindow &displayWindow;
-
-
-        chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now(); /// timpul initial
-        int randomTimer = rand() % 10 + 1;
-
         float width,height;
-
         void Move(Cell &cell,float deltatime);
         sf::Vector2f RandomDirection(Cell &cell);
         bool Touches(Cell &a, Cell &b);
