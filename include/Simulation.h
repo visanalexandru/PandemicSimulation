@@ -31,6 +31,7 @@ class Simulation
 
         void Move(Cell &cell);
         sf::Vector2f RandomDirection(Cell &cell);
+        bool Touches(Cell &a, Cell &b);
 
 
 };

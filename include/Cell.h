@@ -8,6 +8,9 @@ class Cell : public sf::Drawable
 {
     public:
 
+
+
+
         float age;
         float socialDistancing;
         float infectionProb;

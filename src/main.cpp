@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1000,600), "SFML works!");
 	Graph graph(500,100,sf::Vector2f(30,90));
 
 	const int samples=200;
@@ -19,7 +19,7 @@ int main()
 	}
 
 	graph.setData(&values[0],samples);
-	Simulation simulation(window);
+	Simulation simulation(window,200,1,5,10);
 
 	while (window.isOpen())
 	{
