@@ -7,8 +7,8 @@
 #include <chrono>
 #include <iostream>
 #include <cstdlib>
-
-
+#include<cmath>
+#include"Physics.h"
 using namespace std;
 
 
@@ -29,7 +29,7 @@ class Simulation
 
         float width,height;
 
-        void Move(Cell &cell);
+        void Move(Cell &cell,float deltatime);
         sf::Vector2f RandomDirection(Cell &cell);
         bool Touches(Cell &a, Cell &b);
 
