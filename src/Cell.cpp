@@ -4,23 +4,40 @@
 using namespace std;
 
 
-Cell::Cell(sf::Vector2f position,sf::Vector2f speed,float cell_size,bool is_infected): 
+Cell::Cell(){
+    circle.setFillColor(sf::Color::Green);
+}
+Cell::Cell(sf::Vector2f position,sf::Vector2f speed,float cell_size,bool is_infected):
 	Transformable(position,speed),
-	cellSize(cell_size)
+	cell_size(cell_size)
 {
 	setInfected(is_infected);
-	circle.setRadius(cellSize);
+	circle.setRadius(cell_size);
+    circle.setFillColor(sf::Color::Green);
 
 }
 void Cell::setInfected(bool is_infected){
 	infected=is_infected;
-	if(infected)
-		ChangeColor(sf::Color::Red);
-	else ChangeColor(sf::Color::Green);
+	if(infected == true)
+        ChangeColor(sf::Color::Red);
+    else
+        circle.setFillColor(sf::Color::Green);
 }
 
+void Cell::setCorner(sf::Vector2f left_corner){
+    corner = left_corner;
+}
+sf::Vector2f Cell::getCorner(){
+    return corner;
+}
+void Cell::setRadius(float radius){
+    circle.setRadius(radius);
+}
+void Cell::setSpeed(float speed){
+    cell_speed = speed;
+}
 void Cell::setPosition(sf::Vector2f other){
-	circle.setPosition(other-sf::Vector2f(cellSize,cellSize));
+	circle.setPosition(other-sf::Vector2f(cell_size,cell_size));
 	position=other;
 }
 void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const{
@@ -29,7 +46,6 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const{
 void Cell::ChangeColor(sf::Color color){
 	circle.setFillColor(color);
 }
-
 
 bool Cell::isInfected() const{
 	return infected;

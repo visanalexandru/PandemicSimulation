@@ -19,8 +19,10 @@ void add_sample(float value){
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1000,600), "SFML works!");
-	Simulation simulation(window,200,1,5,10);
+	sf::RenderWindow window(sf::VideoMode(600,600), "SFML works!");
+	window.setFramerateLimit(120);
+	Simulation simulation(window,500,1,2,30);
+	simulation.SetCommunities(4 ,4);
 	add_sample(0);
 	add_sample(simulation.getNumInfected());
 
@@ -37,7 +39,7 @@ int main()
 
 		window.clear();
 		simulation.Update();
-		window.draw(graph);
+		//window.draw(graph);
 		window.display();
 
 		if(clock.getElapsedTime().asSeconds()>2.f){
