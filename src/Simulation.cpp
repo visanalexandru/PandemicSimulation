@@ -28,6 +28,33 @@ Simulation::Simulation(sf::RenderWindow &win,int numberCells,int nrInfected,floa
 }
 
 void Simulation::Update(){
+
+	for(int i=0;i<cells.size();i++){
+		sf::Vector2f force(0,0);
+		for(int k=0;k<cells.size();k++){
+			if(i!=k){
+				if(Physics::distance(cells[i].getPosition(),cells[k].getPosition())<80.f){
+					if(cells[i].isInfected()){
+						if(!cells[k].isInfected())
+							force-=Physics::repulsion(cells[i],cells[k],4.f);
+						else force+=Physics::repulsion(cells[i],cells[k],2.f);
+					}
+					else{
+						if(cells[k].isInfected())
+							force+=Physics::repulsion(cells[i],cells[k],4.f);
+						else force+=Physics::repulsion(cells[i],cells[k],2.f);
+					}
+				}
+
+			}
+
+		}
+		sf::Vector2f newvelocity=Physics::normalize(cells[i].getVelocity()+force)*10.f;
+		cells[i].setVelocity(newvelocity);
+
+	}
+
+
 	for(Cell&a:cells){
 		Move(a,0.01);
 	}
@@ -51,9 +78,9 @@ bool Simulation::Touches(Cell &a, Cell &b){
 			a.setInfected( true);
 
 
-		sf::Vector2f aux=a.getVelocity();
-		a.setVelocity(b.getVelocity());
-		b.setVelocity(aux);
+		//sf::Vector2f aux=a.getVelocity();
+		//a.setVelocity(b.getVelocity());
+		//b.setVelocity(aux);
 		return true;
 	}
 	return false;

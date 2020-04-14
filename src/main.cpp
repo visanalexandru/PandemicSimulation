@@ -8,14 +8,14 @@ using namespace std;
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000,600), "SFML works!");
-	Graph graph(500,100,sf::Vector2f(30,90));
+	Graph graph(1000,100,sf::Vector2f(30,90));
 
 	const int samples=200;
 
-	float values[samples];
+	float  values[samples];
 
 	for(int i=0;i<samples;i++){
-		values[i]=sin(i);
+		values[i]=sin(i/10.f)*2.f;
 	}
 
 	graph.setData(&values[0],samples);
