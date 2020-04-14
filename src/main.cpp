@@ -5,21 +5,26 @@
 
 using namespace std;
 
+const int max_samples=50;
+float values[max_samples];
+Graph graph(200,20,sf::Vector2f(100,300));
+
+
+void add_sample(float value){
+	for(int i=0;i<max_samples-1;i++)
+		values[i]=values[i+1];
+	values[max_samples-1]=value;
+	graph.setData(values,max_samples);
+}
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000,600), "SFML works!");
-	Graph graph(1000,100,sf::Vector2f(30,90));
-
-	const int samples=200;
-
-	float  values[samples];
-
-	for(int i=0;i<samples;i++){
-		values[i]=sin(i/10.f)*2.f;
-	}
-
-	graph.setData(&values[0],samples);
 	Simulation simulation(window,200,1,5,10);
+	add_sample(0);
+	add_sample(simulation.getNumInfected());
+
+	sf::Clock clock;
 
 	while (window.isOpen())
 	{
@@ -34,6 +39,11 @@ int main()
 		simulation.Update();
 		window.draw(graph);
 		window.display();
+
+		if(clock.getElapsedTime().asSeconds()>2.f){
+			add_sample(simulation.getNumInfected());
+			clock.restart();
+		}
 	}
 
 	return 0;

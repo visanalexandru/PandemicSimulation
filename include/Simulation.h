@@ -18,6 +18,7 @@ class Simulation
         Simulation();
         Simulation(sf::RenderWindow &window,int numberCells = 200,int nrInfected = 1,float cellSize = 1,float cellSpeed = 1);
         void Update();
+		int getNumInfected() const;
 
     private:
         vector<Cell>cells;
@@ -26,6 +27,7 @@ class Simulation
         void Move(Cell &cell,float deltatime);
         sf::Vector2f RandomDirection(Cell &cell);
         bool Touches(Cell &a, Cell &b);
+		int num_infected;
 
 
 };

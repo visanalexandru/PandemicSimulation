@@ -19,20 +19,10 @@ void Graph::setData(float*samples,int numSamples){
 	if(numSamples==0)
 		return;
 
-
-	float min_val=samples[0],max_val=samples[0];
 	for(int i=0;i<numSamples;i++){
-		min_val=std::min(min_val,samples[i]);
-		max_val=std::max(max_val,samples[i]);
-	}
-
-
-	float sample_height=(float)(height)/(max_val-min_val);
-
-	for(int i=0;i<numSamples;i++){
-		float y=samples[i];
+		float y=20-samples[i]/20.f;
 		sf::Vertex to_add;
-		to_add.position=sf::Vector2f(i*sample_distance,(y-min_val)*sample_height)+position;
+		to_add.position=sf::Vector2f(i*sample_distance,position.y+y*10);
 		if(i>1){
 			vertices.push_back(vertices[vertices.size()-1]);
 		}

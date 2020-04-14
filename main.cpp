@@ -5,17 +5,12 @@ using namespace std;
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
-	Graph graph(500,100,sf::Vector2f(30,90));
+	Graph graph(200,100,sf::Vector2f(30,90));
 
 	const int samples=200;
 
 	float values[samples];
 
-	for(int i=0;i<samples;i++){
-		values[i]=sin(i);
-	}
-
-	graph.setData(&values[0],samples);
 
 	while (window.isOpen())
 	{

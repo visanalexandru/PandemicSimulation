@@ -2,9 +2,11 @@
 
 
 
-Simulation::Simulation(sf::RenderWindow &win,int numberCells,int nrInfected,float cellSize,float cellSpeed) : displayWindow(win){
+Simulation::Simulation(sf::RenderWindow &win,int numberCells,int nrInfected,float cellSize,float cellSpeed) : displayWindow(win),num_infected(nrInfected){
 	width = displayWindow.getSize().x;
 	height = displayWindow.getSize().y;
+
+
 
 	int cnt = 0;
 	for(int i = 0; i < numberCells; i++){
@@ -69,13 +71,24 @@ void Simulation::Update(){
 		displayWindow.draw(a);
 
 }
+int Simulation::getNumInfected() const{
+	return num_infected;
+}
 bool Simulation::Touches(Cell &a, Cell &b){
 	float dist = Physics::distance(a.getPosition(),b.getPosition());
 	if(a.getRadius() + b.getRadius() > dist){
-		if(a.isInfected())
+		if(a.isInfected()){
+			if(!b.isInfected())
+				num_infected++;
 			b.setInfected(true);
-		if(b.isInfected())
+		}
+
+		if(b.isInfected()){
+			if(!a.isInfected())
+				num_infected++;
 			a.setInfected( true);
+		}
+
 
 
 		//sf::Vector2f aux=a.getVelocity();
